@@ -67,8 +67,8 @@ You don't have to run this setup to use the service in weewx, but if you would l
 1. If you want to see debug output, change the `debug` level in the config file to `1`.
 1. Restart weewx, for example `sudo systemctl restart weewx`.
 1. Watch the logs to confirm the service initialized correctly, and to watch debug output, for example:
-   2. `sudo tail -f /var/log/syslog | grep weewx`
-   3. `sudo journalctl -u weewx -f`
+   1`sudo tail -f /var/log/syslog | grep weewx`
+   1`sudo journalctl -u weewx -f`
       
 Optionally edit the `axis_weather_overlay.py` file to customize the data fields that are displayed on the overlay, and/or 
 if you prefer different weather values or want to change the logic I'm using there. 
