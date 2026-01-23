@@ -4,7 +4,7 @@ I have run a [Davis Vantage Pro2](https://www.davisinstruments.com/products/wire
 weather station at my home since 2007, and have had a webcam on my bird feeders since 2008.
 
 Because of Minnesota's harsh winters, I needed a camera that could withstand the cold temperatures without the need
-for a dedicated heater. Most consumer grade electronics aren't rated for temperatures below freezing (32F), which can get to
+for a dedicated heater. Most consumer grade electronics aren't rated for temperatures below freezing (32F), which can get down to
 -20F or colder in the winter here.
 
 The first iteration of Feedercam was a StarDot Netcam, which uploaded a still image every 30 seconds to my website.
@@ -18,13 +18,15 @@ and pull the weather data from a Metobridge Pro running Meteohub. These scripts 
 livedata CGI and then the Axis Dynamic Overlay API to overlay the weather data on the video stream. I installed the [CamStreamer app](https://camstreamer.com/camstreamer-about)
 on the camera, which makes streaming to YouTube (and other platforms like Twitch, Windy, etc), very easy.
 
-Currently I have an Axis P1375-E camera and an external microphone to it for audio. I continue to use the Davis 
+Currently I have an Axis P1375-E camera and connected an external microphone to it for audio. I continue to use the Davis 
 Vantage Pro2, but I now have weewx running on a Beelink mini PC. Since weewx doesn't have a CGI or API to pull data, 
 I decided to write a custom weewx service to process incoming loop packets, and call the Axis camera API to overlay the weather 
 data on the stream. This is done in Python rather than shell scripts and doesn't require a cron job because it's running
-within the weewx engine itself. See my feedercam at https://feedercam.overlookcircle.org (shameless plug) see the result.
+within the weewx engine itself. Check out my [Feedercam](https://feedercam.overlookcircle.org) (shameless plug) see the result,
+and maybe some cool birds too!
 
-You don't have to run the setup to use the service in weewx, but if you would like to run a test before deploying it in weewx, follow these steups:
+## Testing the service with your camera before deploying in weewx
+You don't have to run this setup to use the service in weewx, but if you would like to run a test before deploying it in weewx, follow these steps:
 
 1. `source ./setup.sh` in the root of the project.
 1. `python weewx_axis/test_service.py`
