@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if ! [[ "${BASH_SOURCE[0]}" != "$0" ]]; then
   echo "This script must be sourced, not executed directly."
   echo "Run 'source setup.sh' instead."

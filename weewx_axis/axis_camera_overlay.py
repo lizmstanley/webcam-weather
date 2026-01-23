@@ -47,14 +47,16 @@ class AxisCameraOverlayService(StdService):
         outdoor_temp = packet.get("outTemp")
         overlay_text_values = {
             "temperature": outdoor_temp,
-            "humidity": packet.get("outHumidity"),
             "dewpoint": packet.get("dewpoint"),
         }
-        wind_speed = AxisCameraOverlayService.get_wind_speed(packet)
-        wind_dir = AxisCameraOverlayService.get_wind_dir(packet)
-        if wind_speed is not None and wind_dir is not None:
-            overlay_text_values["wind_speed"] = wind_speed
-            overlay_text_values["wind_dir"] = wind_dir
+        if packet.get("windGust") is not None and packet.get("windGustDir") is not None:
+            overlay_text_values["wind_gust"] = packet.get("windGust")
+            overlay_text_values["wind_dir"] = AxisCameraOverlayService.get_wind_cardinal_dir(packet.get("windGustDir"))
+        elif packet.get("windSpeed") is not None and packet.get("windDir") is not None:
+            overlay_text_values["wind_speed"] =packet.get("windSpeed")
+            overlay_text_values["wind_dir"] = AxisCameraOverlayService.get_wind_cardinal_dir(packet.get("windDir"))
+        if outdoor_temp > 60:
+            overlay_text_values["humidity"] = packet.get("outHumidity")
         if 80 <= outdoor_temp < packet.get("heatindex"):
             overlay_text_values["heat_index"] = packet.get("heatindex")
         if 50 > outdoor_temp > packet.get("windchill"):
@@ -63,44 +65,19 @@ class AxisCameraOverlayService(StdService):
             overlay_text_values["rain"] = packet.get("dayRain")
         return overlay_text_values
 
-    # Get the highest of any wind speed value
-    @staticmethod
-    def get_wind_speed(packet):
-        wind_speeds = []
-        if packet.get("windSpeed") is not None:
-            wind_speeds.append(packet.get("windSpeed"))
-        if packet.get("windSpeed2") is not None:
-            wind_speeds.append(packet.get("windSpeed2"))
-        if packet.get("windSpeed10") is not None:
-            wind_speeds.append(packet.get("windSpeed10"))
-        if packet.get("windGust") is not None:
-            wind_speeds.append(packet.get("windGust"))
-        if packet.get("windGust10") is not None:
-            wind_speeds.append(packet.get("windGust10"))
-        if wind_speeds:
-            return max(wind_speeds)
-        return None
-
-    # Get one of the wind dirs
-    @staticmethod
-    def get_wind_dir(packet):
-        if packet.get("windGustDir") is not None:
-            return AxisCameraOverlayService.get_wind_cardinal_dir(packet.get("windGustDir"))
-        if packet.get("windGustDir10") is not None:
-            return AxisCameraOverlayService.get_wind_cardinal_dir(packet.get("windGustDir10"))
-        if packet.get("windDir") is not None:
-            return AxisCameraOverlayService.get_wind_cardinal_dir(packet.get("windDir"))
-        return None
-
     @staticmethod
     def build_overlay_text(overlay_text_values):
-        text = f"Temp: {overlay_text_values['temperature']}°F | Humidity: {overlay_text_values['humidity']}% | Dew: {overlay_text_values['dewpoint']}°F"
-        if overlay_text_values.get("wind_speed") is not None and overlay_text_values.get("wind_dir") is not None:
-            text = f"{text} | Wind: {overlay_text_values['wind_speed']} {overlay_text_values['wind_dir']}"
+        text = f"Temp: {overlay_text_values['temperature']}°F| Dew: {overlay_text_values['dewpoint']}°F"
         if overlay_text_values.get("heat_index", None):
             text = f"{text} | Heat: {overlay_text_values['heat_index']}°F"
         if overlay_text_values.get("wind_chill", None):
             text = f"{text} | Chill: {overlay_text_values['wind_chill']}°F"
+        if overlay_text_values.get("humidity") is not None:
+            text = f"{text} | Humidity: {overlay_text_values['humidity']}%"
+        if overlay_text_values.get("wind_gust") is not None and overlay_text_values.get("wind_dir") is not None:
+            text = f"{text} | Wind Gust: {overlay_text_values['wind_gust']} {overlay_text_values['wind_dir']}"
+        elif overlay_text_values.get("wind_speed") is not None and overlay_text_values.get("wind_dir") is not None:
+            text = f"{text} | Wind: {overlay_text_values['wind_speed']} {overlay_text_values['wind_dir']}"
         if overlay_text_values.get("rain", None):
             text = f"{text} | Rain: {overlay_text_values['rain']}in"
         return text

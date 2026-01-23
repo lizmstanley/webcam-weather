@@ -44,6 +44,7 @@ You don't have to run the setup to use the service in weewx, but if you would li
 
 ### Setup in weewx
 1. Copy the `weewx_axis/axis_weather_overlay.py` file to your weewx `/user` directory. Mine was in `/etc/weewx/bin/user`, but it may vary depending on your installation.
+   1. If you have weewx running on another server, see the `scp_file.sh` script in this project. 
 1. Edit your `weewx.conf` file to add the new service. Add the following (I put mine just before the `[Engine]` section):
       ```
       [AxisCameraOverlay]
