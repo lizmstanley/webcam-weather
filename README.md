@@ -5,7 +5,7 @@ weather station at my home since 2007, and have had a webcam on my bird feeders 
 
 Because of Minnesota's harsh winters, I needed a camera that could withstand the cold temperatures without the need
 for a dedicated heater. Most consumer grade electronics aren't rated for temperatures below freezing (32F), which can get to
--20F or colder in the winter.
+-20F or colder in the winter here.
 
 The first iteration of Feedercam was a StarDot Netcam, which uploaded a still image every 30 seconds to my website.
 The camera ran an embedded uCLinux OS, and allowed direct access via telnet. I was able to run shell scripts
