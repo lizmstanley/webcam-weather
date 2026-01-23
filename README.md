@@ -60,7 +60,7 @@ You don't have to run this setup to use the service in weewx, but if you would l
        axis_password = [your axis password (for the operator account)]
       ```
 1. In the `[Engine]` section of `weewx.conf`, in the `[[Services]]` sections, add the new service as `user.axis_camera_overlay.AxisCameraOverlayService`. 
-   2. I added mine to the `restful_services` list. 
+   1. I added mine to the `restful_services` list. 
 1. I'm using loop2 packets, which are supported by the Davis Vantage Pro2. These packets contain more accurate data with higher precision.
    1. This requires Davis firmware v1.90 or later.
    1. You'll need to update weewx.conf, which defaults to Loop1 packets. In the `[Vantage]` section, set `loop_request = 2`.
