@@ -1,21 +1,17 @@
-[tool.poetry]
-name = "python-template"
-packages = [
-    { include = "src" }
-]
-version = "0.1.0"
-description = "Simple Python project template"
-authors = ["Liz Stanley <lizmstanley@gmail.com>"]
+[project]
+name = "weewx_axis"
+description = "WeeWX extension to overlay weather data on an Axis camera stream"
+version = "0.0.1"
+authors = [{name="Liz Stanley", email="lizmstanley@gmail.com"}]
+maintainers = [{name="Liz Stanley"}]
 readme = "README.md"
-
-[tool.poetry.dependencies]
-python = "^3.13"
-python-dotenv = "1.0.1"
-toml = "^0.10.2"
-
-[tool.poetry.group.test.dependencies]
-pytest = "^8.4.1"
-pytest-mock = "^3.14.1"
+requires-python = ">=3.14,<4.0"
+dependencies = [
+    "python-dotenv>=1.2.1",
+    "toml>=0.10.2",
+    "weewx>=5.2.0",
+    "requests>=2.32.5"
+]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
