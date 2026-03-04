@@ -48,11 +48,12 @@ You don't have to run this setup to use the service in weewx, but if you would l
 1. For weewx running on another server:
    1. Copy `sample.env` to `.env` and set the environment variables for weewx setup. Example values:
       ```
-      WEEWX_USER=weewx
-      WEEWX_GROUP=weewx
+      WEEWX_HOST=1.2.3.4
+      WEEWX_USER=weewx_user
       WEEWX_USER_DIR=/etc/weewx/bin/user
       ```
    1. Execute `upload_extension.sh` which will tar/gz the extension and place it in the user directory (specified in `.env`). 
+   2. Note this assumes you have ssh running on your weewx host and have set up a public/private key pair.
 1. Or you can create the extension tgz manually:
    1. `tar -czvf axis_camera_overlay.tar.gz --exclude='test*' --exclude='*pycache*' axis_camera_overlay`
    1. Copy `axis_camera_overlay.tar.gz` to your weewx user directory, for example `/etc/weewx/bin/user/`.
