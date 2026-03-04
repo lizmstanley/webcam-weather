@@ -2,7 +2,7 @@ import os
 
 from dotenv import load_dotenv
 
-from axis_camera_overlay import AxisCameraOverlayService
+from bin.user.axis_camera_overlay import AxisCameraOverlayService
 
 load_dotenv()
 
@@ -28,10 +28,11 @@ if __name__ == '__main__':
 
     service = AxisCameraOverlayService(MockEngine(),
                                        {
-                                           "AxisCameraOverlay": {
-                                               "axis_host": os.getenv("AXIS_CAMERA_HOST"),
-                                               "axis_user": os.getenv("AXIS_CAMERA_USER"),
-                                               "axis_password": os.getenv("AXIS_CAMERA_PASSWORD")
+                                           'AxisCameraOverlay': {
+                                               'enabled': True,
+                                               'axis_host': os.getenv('AXIS_CAMERA_HOST'),
+                                               'axis_user': os.getenv('AXIS_CAMERA_USER'),
+                                               'axis_password': os.getenv('AXIS_CAMERA_PASSWORD')
                                            }
                                        })
     service.process_loop_packet(MockEvent())

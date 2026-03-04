@@ -42,7 +42,7 @@ if [[ $poetry_command_exists -ne 0 || $poetry_installed_for_active_python -ne 0 
   echo "Poetry not found, installing..."
   pip install poetry
 fi
-poetry lock && poetry install
+poetry lock && poetry install --no-root
 if ! [ -f .env ]; then
   echo ".env file not found, copying sample.env to .env"
   cp sample.env .env
