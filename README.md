@@ -25,12 +25,6 @@ data on the stream. This is done in Python rather than shell scripts and doesn't
 within the weewx engine itself. Check out my [Feedercam](https://feedercam.overlookcircle.org) (shameless plug) see the result,
 and maybe some cool birds too!
 
-## Testing the service with your camera before deploying in weewx
-You don't have to run this setup to use the service in weewx, but if you would like to run a test before deploying it in weewx, follow these steps:
-
-1. `source ./setup.sh` in the root of the project.
-1. `python axis_camera_overlay/test_service.py`
-
 ## Setup your Axis Camera
 1. Log into your Axis camera web interface.
 1. Go to Settings -> System -> Accounts
@@ -43,6 +37,12 @@ You don't have to run this setup to use the service in weewx, but if you would l
    1. The `#D` placeholder is for the dynamic overlay text, which will be updated by the weewx service with weather data from your Davis LOOP packets.
 1. Click "Modifiers" to see what other placeholders are available.
 1. Set the font size, color, and position as desired.
+
+## Testing the service with your camera before deploying in weewx
+You don't have to run this setup to use the service in weewx, but if you would like to run a test before deploying it in weewx, follow these steps:
+
+1. `source ./setup.sh` in the root of the project.
+1. `python axis_camera_overlay/test_service.py`
 
 ## Setup in weewx
 1. For weewx running on another server:
